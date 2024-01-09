@@ -1,11 +1,8 @@
 #include <string>
 #include <utility>
-#include <iostream>
 
 using std::string;
 using std::pair;
-using std::cout;
-using std::endl;
 
 class OTP {
 
@@ -17,23 +14,18 @@ public:
     OTP(string key, string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ") {
         this->alphabet = alphabet;
         this->key = key;
-        cout << "alphabet:" << alphabet << endl;
-        cout << "key:" << key << endl;
     }
 
 private:
     bool contains(char needle, string haystack) {
-        //cout << "contains(" << needle << ", " << haystack << ")" << endl;
         bool retval = false;
         if (haystack.find(needle) != string::npos) {
             retval = true;
         }
-        //cout << " retval:" << retval << endl;
         return retval;
     }
 
     bool all_valid_letters(string in_str) {
-        //cout << "all_valid_letters(" << in_str << ")" << endl;
         bool retval = true;
         for (int i = 0; i < in_str.length(); i++) {
             if (!contains(in_str[i], alphabet)) {
@@ -41,7 +33,6 @@ private:
                 break;
             }
         }
-        //cout << " retval:" << retval << endl;
         return retval;
     }
 
@@ -58,7 +49,6 @@ private:
 
 public:
     pair<string, string> encode(string in_str) {
-        cout << "encode(" << in_str << ")" << endl;
         string encoded = "";
         if (in_str.length() > key.length()) {
             return pair<string, string>("Text to encode must be shorter or the same length as the key.", "");
@@ -69,16 +59,8 @@ public:
         if (!all_valid_letters(key)) {
             return pair<string, string>("The key has letters that are not in the alphabet.", "");
         }
-        string a;
-        string b;
-        a = in_str;
-        b = key;
-        //for (int i = 0; i < in_str.length(); i++) {
-            //a += alphabet[indexOf(in_str[i], alphabet)];
-            //b += alphabet[indexOf(key[i], alphabet)];
-        //}
-        cout << "a:" << a << endl;
-        cout << "b:" << b << endl;
+        string a = in_str;
+        string b = key;
         for (int i = 0; i < in_str.length(); i++) {
             encoded += alphabet[(a[i] + b[i]) % alphabet.length()];
         }
@@ -86,7 +68,6 @@ public:
     }
 
     pair<string, string> decode(string in_str) {
-        cout << "decode(" << in_str << ")" << endl;
         string decoded = "";
         if (in_str.length() > key.length()) {
             return pair<string, string>("Text to decode must be shorter or the same length as the key.", "");
@@ -97,12 +78,8 @@ public:
         if (!all_valid_letters(key)) {
             return pair<string, string>("The key has letters that are not in the alphabet.", "");
         }
-        string a;
-        string b;
-        a = key;
-        b = in_str;
-        cout << "a:" << a << endl;
-        cout << "b:" << b << endl;
+        string a = key;
+        string b = in_str;
         int x = 0;
         for (int i = 0; i < in_str.length(); i++) {
             int c = a[i] - b[i];

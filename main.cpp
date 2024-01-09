@@ -26,7 +26,7 @@ int main() {
     pair<string, string> results2;
     results2 = otp2.decode("APPLE");
     cout << "msg:" << results2.first << endl;
-    cout << "encoded:" << results2.second << endl;
+    cout << "decoded:" << results2.second << endl;
 
 
     return 0;
